@@ -1,0 +1,104 @@
+<div *ngIf="error" class="alert alert-danger">{{error}}</div>
+<div *ngIf="success" class="alert alert-success">{{success}}</div>
+
+<div id="bunkForm">
+  <h2>Add New Bunk</h2>
+  <form #f="ngForm" name="theForm" (submit)="addBunk(f)">
+    
+	  <div class="list-group">
+		  <div class="list-group-item row">
+			  <div class="form-group col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+				  <input type="text"
+					class="form-control"
+					name="name"
+					[(ngModel)]="bunk.name"
+					#bunkName="ngModel"
+					required
+					pattern="^[a-zA-Z]+$"
+					placeholder="Enter Bunk Name">
+				  <span class="help-block danger" *ngIf="bunkName.errors?.required && bunkName.touched">The Bunk Name is required</span>
+				  <span class="help-block danger" *ngIf="bunkName.errors?.pattern && bunkName.touched">The Bunk Name can only contain the letters a-z or A-Z</span>
+			  </div>
+			  
+			  <div class="form-group col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+				  <select
+					class="form-control"
+					name="groupID"
+					[(ngModel)]="bunk.groupID"
+					#bunkGroup="ngModel">
+					  	<option *ngFor="let item of groups;" value="{{item.id}}">{{item.name}}</option>
+				  </select>
+				  <span class="help-block danger" *ngIf="bunkGroup.errors?.required && bunkGroup.touched">The Age Group is required</span>
+			  </div>
+			  
+			  <div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+				  <select
+						 [(ngModel)]="bunk.counselor"
+						 class="form-control"
+						 name="counselor" 	
+						 #bunkCounselor="ngModel">
+					    <option value="0">Unassigned</option> 
+						<option *ngFor="let item of counselors;" value="{{item.id}}">{{item.lastName}}, {{item.firstName}}</option>
+					</select>
+			  </div>
+			  
+			  <div class="form-group col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+				  <button class="btn btn-primary btn-sm" [disabled]="f.invalid">Add Bunk</button>
+			  </div>
+		  </div>
+	  </div>
+  </form>
+</div>
+
+<div id="bunkList">
+    <h2>Edit Existing Bunks</h2>
+   	<div class="list-group">
+      <div *ngFor="let item of bunks;let i = index;" class="list-group-item row">
+	    <div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+          <input type="text"
+                 [(ngModel)]="bunks[i].name"
+                 class="form-control"
+                 required
+                 pattern="^[a-zA-Z]+$"
+                 #name="ngModel"
+				 [ngClass]="{ 'is-invalid': name.touched && name.invalid }">
+        </div>
+        <div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+          <select
+				 [(ngModel)]="bunks[i].groupID"
+                 class="form-control"
+                 required
+				 name="groupID"	
+                 #groupID="ngModel">
+         		<option *ngFor="let item of groups;" value="{{item.id}}">{{item.name}}</option>
+       	  	</select>
+        </div>
+		<div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+          <select
+				 [(ngModel)]="bunks[i].counselor"
+                 class="form-control"
+                 name="counselor" 	
+                 #counselor="ngModel">
+			  	<option value="0">Unassigned</option>
+         		<option *ngFor="let item of counselors;" value="{{item.id}}">{{item.lastName}}, {{item.firstName}}</option>
+       	  	</select>
+        </div>
+        <div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+          <input type="button"
+                 value="Update"
+                 class="btn btn-success btn-sm"
+                 [disabled]="name.invalid || groupID.invalid"
+                 (click)="updateBunk(name, groupID, counselor, item.id)">
+          &nbsp;
+          <input type="button"
+                 value="Delete"
+                 class="btn btn-danger btn-sm"
+                 (click)="deleteBunk(item.id)">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+

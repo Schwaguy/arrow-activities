@@ -1,0 +1,10 @@
+/* Header SCSS */
+.navbar.navbar-dark.bg-inverse {
+  background-color: #000; }
+
+.navbar.navbar-dark.bg-inverse a {
+  color: #eee !important; }
+
+.nav .nav-item {
+  display: inline !important;
+  float: left !important; }

@@ -1,0 +1,72 @@
+<div *ngIf="error" class="alert alert-danger">{{error}}</div>
+<div *ngIf="success" class="alert alert-success">{{success}}</div>
+
+<div id="bunkForm">
+  <h2>Add New Activity</h2>
+  <form #f="ngForm" name="ActivityForm" (submit)="addActivity(f)">
+    
+	  <div class="list-group">
+		  <div class="list-group-item row">
+			  <div class="form-group col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+				  <input type="text"
+					class="form-control"
+					name="name"
+					[(ngModel)]="activity.name"
+					#activityName="ngModel"
+					required
+					placeholder="Enter Activity Name">
+				  <span class="help-block danger" *ngIf="activityName.errors?.required && activityName.touched">The Activity Name is required</span>
+				  <span class="help-block danger" *ngIf="activityName.errors?.pattern && activityName.touched">The Activity Name can only contain the letters a-z or A-Z</span>
+			  </div>
+			  
+			  <div class="form-group col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+				 <textarea
+					class="form-control"
+					name="description"
+					[(ngModel)]="activity.description"
+					#activityDescription="ngModel"
+					placeholder="Enter Activity Description"></textarea>
+			  </div>
+			  
+			  <div class="form-group col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+				  <button class="btn btn-primary btn-sm" [disabled]="f.invalid">Add Activity</button>
+			  </div>
+		  </div>
+	  </div>
+  </form>
+</div>
+
+<div id="bunkList">
+    <h2>Edit Existing Activities</h2>
+   	<div class="list-group">
+      <div *ngFor="let item of activities;let i = index;" class="list-group-item row">
+	    <div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+          <input type="text"
+                 [(ngModel)]="activities[i].name"
+                 class="form-control"
+                 required
+                 #name="ngModel"
+				 [ngClass]="{ 'is-invalid': name.touched && name.invalid }">
+        </div>
+        <div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+          <textarea
+				class="form-control"
+				[(ngModel)]="activities[i].description"
+                #description="ngModel"></textarea>
+        </div>
+        <div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+          <input type="button"
+                 value="Update"
+                 class="btn btn-success btn-sm"
+                 [disabled]="name.invalid"
+                 (click)="updateActivity(name, description, item.id)">
+          &nbsp;
+          <input type="button"
+                 value="Delete"
+                 class="btn btn-danger btn-sm"
+                 (click)="deleteActivity(item.id)">
+
+        </div>
+      </div>
+    </div>
+  </div>
