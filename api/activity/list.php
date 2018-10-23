@@ -9,9 +9,10 @@ $sql = "SELECT * FROM activities WHERE active=1";
 if($result = mysqli_query($con,$sql)) {
   	$cr = 0;
   	while($row = mysqli_fetch_assoc($result)) {
-    	$activities[$cr]['id']    = $row['id'];
+    	$activities[$cr]['id'] = $row['id'];
     	$activities[$cr]['name'] = $row['name'];
     	$activities[$cr]['description'] = $row['description'];
+		$activities[$cr]['week'] = $row['week'];
     	$cr++;
   	}
     echo json_encode(['data'=>$activities]);

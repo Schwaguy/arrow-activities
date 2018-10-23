@@ -35,14 +35,15 @@ export class BunkComponent implements OnInit {
   error = '';
   success = '';
 
-  constructor(private bunkService: BunkService, private userService: UserService) {
+  constructor(private bunkService: BunkService, private userService: UserService, private counselorService: CounselorService) {
 	   this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
 	  this.getBunks();
 	  this.getGroups();
-	  this.getCounselors();
+	  //this.getCounselors();
+	  this.loadCounselors();
   }
 
   getBunks(): void {
@@ -66,21 +67,9 @@ export class BunkComponent implements OnInit {
       }
     );
   }
-	
-  getCounselors(): void {
-    this.bunkService.getCounselors().subscribe(
-      (res: Counselor[]) => {
-        this.counselors = res;
-      },
-      (err) => {
-        this.error = err;
-      }
-    );
-  }
   
   addBunk(f) {
     this.resetErrors();
-
     this.bunkService.store(this.bunk)
       .subscribe(
         (res: Bunk[]) => {
@@ -122,11 +111,11 @@ export class BunkComponent implements OnInit {
       );
   }
 	
-	/*private loadCounselors() {
-        this.userService.getCounselors().pipe(first()).subscribe(users => { 
-            this.counselors = users; 
+	private loadCounselors() {
+        this.counselorService.getCounselor().pipe(first()).subscribe(counselors => { 
+            this.counselors = counselors;  
         });
-    }*/
+    }
 
   	private resetErrors(){
     	this.success = '';

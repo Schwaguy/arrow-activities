@@ -18,15 +18,17 @@ if(isset($postdata) && !empty($postdata)) {
   	// Sanitize.
   	$name = mysqli_real_escape_string($con, trim($request->data->name));
   	$description = mysqli_real_escape_string($con, trim($request->data->description));
+	$week = mysqli_real_escape_string($con, (int)$request->data->week);
     
   	// Store.
-  	$sql = "INSERT INTO `activities` (`id`,`name`,`description`) VALUES (null,'{$name}','{$description}')";
+  	$sql = "INSERT INTO `activities` (`id`,`name`,`description`, `week`) VALUES (null,'{$name}','{$description}','{$week}')";
 
 	if(mysqli_query($con,$sql)) {
     	http_response_code(201);
     	$activity = [
       		'name' => $name,
       		'description' => $description,
+			'week' => $week,
       		'id'   => mysqli_insert_id($con)
     	];
     	echo json_encode(['data'=>$activity]);

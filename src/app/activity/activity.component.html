@@ -28,6 +28,17 @@
 					placeholder="Enter Activity Description"></textarea>
 			  </div>
 			  
+			  <div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+				  <select
+						 [(ngModel)]="activity.week"
+						 class="form-control"
+						 name="week" 	
+						 #activityWeek="ngModel">
+					    <option value="0">Unassigned</option> 
+						<option *ngFor="let item of weeks;" value="{{item.id}}">{{item.name}}</option>
+					</select>
+			  </div>
+			  
 			  <div class="form-group col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
 				  <button class="btn btn-primary btn-sm" [disabled]="f.invalid">Add Activity</button>
 			  </div>
@@ -54,12 +65,22 @@
 				[(ngModel)]="activities[i].description"
                 #description="ngModel"></textarea>
         </div>
+		<div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+          <select
+				 [(ngModel)]="activities[i].week"
+                 class="form-control"
+                 name="week" 	
+                 #week="ngModel">
+			  	<option value="0">Unassigned</option>
+         		<option *ngFor="let item of weeks;" value="{{item.id}}">{{item.name}}</option>
+       	  	</select>
+        </div>
         <div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
           <input type="button"
                  value="Update"
                  class="btn btn-success btn-sm"
                  [disabled]="name.invalid"
-                 (click)="updateActivity(name, description, item.id)">
+                 (click)="updateActivity(name, description, week, item.id)">
           &nbsp;
           <input type="button"
                  value="Delete"

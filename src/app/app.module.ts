@@ -6,10 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent }  from './app.component';
 import { routing } from './app.routing';
 
+import { MaterialModule } from './material/material.module';
+
 import { AlertComponent } from './_directives';
 import { AuthGuard } from './_guards';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-import { AlertService, AuthenticationService, UserService, BunkService, ActivityService } from './_services';
+import { AlertService, AuthenticationService, UserService, BunkService, ActivityService, WeekService } from './_services';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
@@ -18,6 +20,7 @@ import { BunkComponent } from './bunk';
 //import { GroupComponent } from './group';
 //import { CounslorComponent } from './counselor';
 import { ActivityComponent } from './activity';
+import { WeekComponent } from './week';
 
 @NgModule({
     imports: [
@@ -25,7 +28,8 @@ import { ActivityComponent } from './activity';
         ReactiveFormsModule,
         HttpClientModule,
 		FormsModule,
-        routing
+        routing,
+		MaterialModule
     ],
     declarations: [
         AppComponent,
@@ -37,7 +41,8 @@ import { ActivityComponent } from './activity';
 		BunkComponent,
 		//GroupComponent,
 		//CounselorComponent,
-		ActivityComponent
+		ActivityComponent,
+		WeekComponent
     ],
     providers: [
         AuthGuard,
@@ -48,6 +53,7 @@ import { ActivityComponent } from './activity';
 		//GroupService,
 		//CounselorService,
 		ActivityService,
+		WeekService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 

@@ -7,6 +7,7 @@ import { AuthGuard } from './_guards';
 import { BunkComponent } from './bunk';
 import { UserComponent } from './user';
 import { ActivityComponent } from './activity';
+import { WeekComponent } from './week';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -15,6 +16,7 @@ const appRoutes: Routes = [
 	{ path: 'bunks', component: BunkComponent },
 	{ path: 'users', component: UserComponent },
 	{ path: 'activities', component: ActivityComponent },
+	{ path: 'weeks', component: WeekComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

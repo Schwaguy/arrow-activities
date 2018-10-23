@@ -37,15 +37,6 @@ export class BunkService {
     	catchError(this.handleError));
   	}
 	
-	getCounselors(): Observable<Counselor[]> {
-    	return this.http.get(`${this.baseUrl}/users/counselors`).pipe(
-      	map((res) => {
-        	this.counselors = res['data'];
-        	return this.counselors;
-    	}),
-    	catchError(this.handleError));
-  	}
-	
 	store(bunk: Bunk): Observable<Bunk[]> {
     	return this.http.post(`${this.baseUrl}/bunks/store`, { data: bunk })
       	.pipe(map((res) => {

@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { Activity } from '../_models';
+import { Week } from '../_models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { Activity } from '../_models';
 export class ActivityService {
 	baseUrl = 'http://activities.arrowheaddaycamp.com/api';
 	activities: Activity[];
+	weeks: Week[];
 	
 	constructor(private http: HttpClient) { }
 
@@ -41,6 +43,7 @@ export class ActivityService {
         	if (theActivity) {
           		theActivity['name'] = activity['name'];
 				theActivity['description'] = activity['description'];
+				theActivity['week'] = +activity['week'];
         	}
         	return this.activities;
       	}),

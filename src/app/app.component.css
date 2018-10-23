@@ -1,5 +1,6 @@
 /* Scss Document */
 /* Header SCSS */
+@import url(~@angular/material/prebuilt-themes/indigo-pink.css);
 .navbar.navbar-dark.bg-inverse {
   background-color: #000; }
 

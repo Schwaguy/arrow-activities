@@ -6,6 +6,12 @@ import { first } from 'rxjs/operators';
 import { Activity } from '../_models';
 import { ActivityService } from '../_services';
 
+import { Week } from '../_models';
+import { WeekService } from '../_services';
+
+import { User } from '../_models';
+import { UserService } from '../_services';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'activity.component.html',
@@ -15,15 +21,22 @@ export class ActivityComponent implements OnInit {
   activities: Activity[];
   activity = new Activity('','',0);
 	
+  weeks: Week[];
+  week = new Week('','','',0);	
+	
+  currentUser: User;
+  users: User[] = [];	
+	
   error = '';
   success = '';
 
-  constructor(private activityService: ActivityService) {
-	   //this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  constructor(private activityService: ActivityService, private userService: UserService, private weekService: WeekService) {
+	   this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
 	  this.getActivities();
+	  this.loadWeeks();
   }
 
   getActivities(): void {
@@ -56,9 +69,9 @@ export class ActivityComponent implements OnInit {
       );
   }
 
-  updateActivity(name, description, id) {
+  updateActivity(name, description, week, id) {
     this.resetErrors();
-    this.activityService.update({ name: name.value, description: description.value, id: +id })
+    this.activityService.update({ name: name.value, description: description.value, week: week.value, id: +id })
       .subscribe(
         (res) => {
           this.activities = res;
@@ -80,6 +93,12 @@ export class ActivityComponent implements OnInit {
         (err) => this.error = err
       );
   }
+	
+	private loadWeeks() {
+        this.weekService.getAll().pipe(first()).subscribe(weeks => { 
+            this.weeks = weeks; 
+        });
+    }
 	
   	private resetErrors(){
     	this.success = '';

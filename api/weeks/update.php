@@ -14,14 +14,16 @@ if(isset($postdata) && !empty($postdata)) {
     	return http_response_code(400);
   	}
     
-  	// Sanitize.
+	// Sanitize.
   	$id = mysqli_real_escape_string($con, (int)$request->data->id);
   	$name = mysqli_real_escape_string($con, trim($request->data->name));
-  	$description = mysqli_real_escape_string($con, trim($request->data->description));
-	$week = mysqli_real_escape_string($con, (int)$request->data->week);
+  	$start = mysqli_real_escape_string($con, $request->data->start);
+	if (!empty($start)) { $start = date("Y-m-d", strtotime($start)); }
+	$end = mysqli_real_escape_string($con, $request->data->end);
+	if (!empty($end)) { $end = date("Y-m-d", strtotime($end)); }
 	
 	// Update.
-  	$sql = "UPDATE `activities` SET `name`='{$name}', `description`='{$description}', `week`='{$week}' WHERE `id`='{$id}' LIMIT 1";
+  	$sql = "UPDATE `weeks` SET `name`='{$name}', `start`='{$start}', `end`='{$end}' WHERE `id`='{$id}' LIMIT 1";
 	if(mysqli_query($con, $sql)) {
 		http_response_code(204);
   	} else {
