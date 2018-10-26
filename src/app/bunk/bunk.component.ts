@@ -4,8 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { Bunk } from '../_models';
-import { Group } from '../_models';
+//import { Group } from '../_models';
 import { BunkService } from '../_services';
+
+import { Group } from '../_models';
+import { GroupService } from '../_services';
 
 import { Counselor } from '../_models';
 import { CounselorService } from '../_services';
@@ -35,14 +38,14 @@ export class BunkComponent implements OnInit {
   error = '';
   success = '';
 
-  constructor(private bunkService: BunkService, private userService: UserService, private counselorService: CounselorService) {
+  constructor(private bunkService: BunkService, private userService: UserService, private counselorService: CounselorService,  private groupService: GroupService) {
 	   this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
 	  this.getBunks();
-	  this.getGroups();
-	  //this.getCounselors();
+	  //this.getGroups();
+	  this.loadGroups()
 	  this.loadCounselors();
   }
 
@@ -57,7 +60,7 @@ export class BunkComponent implements OnInit {
     );
   }
 
-  getGroups(): void {
+  /*getGroups(): void {
     this.bunkService.getGroups().subscribe(
       (res: Group[]) => {
         this.groups = res;
@@ -66,7 +69,7 @@ export class BunkComponent implements OnInit {
         this.error = err;
       }
     );
-  }
+  }*/
   
   addBunk(f) {
     this.resetErrors();
@@ -110,14 +113,20 @@ export class BunkComponent implements OnInit {
         (err) => this.error = err
       );
   }
-	
+  
+  private loadGroups() {
+      this.groupService.getAll().pipe(first()).subscribe(groups => { 
+        this.groups = groups; 
+      });
+  }
+
 	private loadCounselors() {
         this.counselorService.getCounselor().pipe(first()).subscribe(counselors => { 
             this.counselors = counselors;  
         });
-    }
+  }
 
-  	private resetErrors(){
+  private resetErrors(){
     	this.success = '';
     	this.error   = '';
 	}

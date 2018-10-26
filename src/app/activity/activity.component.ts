@@ -9,6 +9,12 @@ import { ActivityService } from '../_services';
 import { Week } from '../_models';
 import { WeekService } from '../_services';
 
+import { Group } from '../_models';
+import { GroupService } from '../_services';
+
+import { Period } from '../_models';
+import { PeriodService } from '../_services';
+
 import { User } from '../_models';
 import { UserService } from '../_services';
 
@@ -19,10 +25,16 @@ import { UserService } from '../_services';
 })
 export class ActivityComponent implements OnInit {
   activities: Activity[];
-  activity = new Activity('','',0);
+  activity = new Activity('','','',0,'',0,'',0,'');
 	
   weeks: Week[];
-  week = new Week('','','',0);	
+  week = new Week('','','',0);
+  
+  groups: Group[];
+  group = new Group('','',0,0,0);
+
+  periods: Period[];
+  period = new Period('','','','',0,0,0,0,0,0);
 	
   currentUser: User;
   users: User[] = [];	
@@ -30,13 +42,15 @@ export class ActivityComponent implements OnInit {
   error = '';
   success = '';
 
-  constructor(private activityService: ActivityService, private userService: UserService, private weekService: WeekService) {
+  constructor(private activityService: ActivityService, private userService: UserService, private weekService: WeekService, private groupService: GroupService, private periodService: PeriodService) {
 	   this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
 	  this.getActivities();
-	  this.loadWeeks();
+    this.loadWeeks();
+    this.loadPeriods();
+    this.loadGroups();
   }
 
   getActivities(): void {
@@ -69,9 +83,9 @@ export class ActivityComponent implements OnInit {
       );
   }
 
-  updateActivity(name, description, week, id) {
+  updateActivity(name, description, location, capacity, week, day, period, groups, prerequisites, id) {
     this.resetErrors();
-    this.activityService.update({ name: name.value, description: description.value, week: week.value, id: +id })
+    this.activityService.update({ name:name.value, description:description.value, location:location.value, capacity:capacity.value, week:week.value, day:day.value, period:period.value, groups:groups.value, prerequisites:prerequisites.value, id:+id })
       .subscribe(
         (res) => {
           this.activities = res;
@@ -95,12 +109,24 @@ export class ActivityComponent implements OnInit {
   }
 	
 	private loadWeeks() {
-        this.weekService.getAll().pipe(first()).subscribe(weeks => { 
-            this.weeks = weeks; 
-        });
-    }
-	
-  	private resetErrors(){
+      this.weekService.getAll().pipe(first()).subscribe(weeks => { 
+          this.weeks = weeks; 
+      });
+   }
+  
+  private loadPeriods() {
+      this.periodService.getAll().pipe(first()).subscribe(periods => { 
+        this.periods = periods; 
+      });
+  }
+
+  private loadGroups() {
+      this.groupService.getAll().pipe(first()).subscribe(groups => { 
+        this.groups = groups; 
+      });
+  }
+
+  private resetErrors(){
     	this.success = '';
     	this.error   = '';
 	}

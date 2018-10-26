@@ -43,7 +43,13 @@ export class ActivityService {
         	if (theActivity) {
           		theActivity['name'] = activity['name'];
 				theActivity['description'] = activity['description'];
+				theActivity['location'] = activity['location'];
+				theActivity['capacity'] = activity['capacity'];
+				theActivity['groups'] = activity['groups'];
 				theActivity['week'] = +activity['week'];
+				theActivity['day'] = activity['day'];
+				theActivity['period'] = activity['period'];
+				theActivity['prerequisites'] = activity['prerequisites'];
         	}
         	return this.activities;
       	}),

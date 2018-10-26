@@ -13,6 +13,8 @@ if($result = mysqli_query($con,$sql)) {
     	$activities[$cr]['name'] = $row['name'];
     	$activities[$cr]['description'] = $row['description'];
 		$activities[$cr]['week'] = $row['week'];
+		$activities[$cr]['day'] = $row['day'];
+		$activities[$cr]['period'] = $row['period'];
     	$cr++;
   	}
     echo json_encode(['data'=>$activities]);

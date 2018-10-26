@@ -17,13 +17,13 @@ if(isset($postdata) && !empty($postdata)) {
 	// Sanitize.
   	$id = mysqli_real_escape_string($con, (int)$request->data->id);
   	$name = mysqli_real_escape_string($con, trim($request->data->name));
-  	$start = mysqli_real_escape_string($con, $request->data->start);
-	if (!empty($start)) { $start = date("Y-m-d", strtotime($start)); }
-	$end = mysqli_real_escape_string($con, $request->data->end);
-	if (!empty($end)) { $end = date("Y-m-d", strtotime($end)); }
+  	$startDate = mysqli_real_escape_string($con, $request->data->startDate);
+	if (!empty($startDate)) { $startDate = date("Y-m-d", strtotime($startDate)); }
+	$endDate = mysqli_real_escape_string($con, $request->data->endDate);
+	if (!empty($endDate)) { $endDate = date("Y-m-d", strtotime($endDate)); }
 	
 	// Update.
-  	$sql = "UPDATE `weeks` SET `name`='{$name}', `start`='{$start}', `end`='{$end}' WHERE `id`='{$id}' LIMIT 1";
+  	$sql = "UPDATE `weeks` SET `name`='{$name}', `startDate`='{$startDate}', `endDate`='{$endDate}' WHERE `id`='{$id}' LIMIT 1";
 	if(mysqli_query($con, $sql)) {
 		http_response_code(204);
   	} else {

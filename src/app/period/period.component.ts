@@ -3,22 +3,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { Group } from '../_models';
-import { GroupService } from '../_services';
+import { Period } from '../_models';
+import { PeriodService } from '../_services';
 
 @Component({
   selector: 'app-root',
-  //templateUrl: 'group.component.html',
-  //styleUrls: ['group.component.css']
 })
-export class GroupComponent implements OnInit {
-  groups: Group[];
-  group = new Group('','',0,0);	
+export class PeriodComponent implements OnInit {
+  periods: Period[];
+  period = new Period('','','','',0,0,0,0,0);	
   	
   error = '';
   success = '';
 
-  constructor(private groupService: GroupService) {
+  constructor(private periodService: PeriodService) {
   }
 
   ngOnInit() {
@@ -26,9 +24,9 @@ export class GroupComponent implements OnInit {
   }
 
   getAll(): void {
-    this.groupService.getAll().subscribe(
-      (res: Group[]) => {
-        this.groups = res;
+    this.periodService.getAll().subscribe(
+      (res: Period[]) => {
+        this.periods = res;
       },
       (err) => {
         this.error = err;

@@ -6,3 +6,4 @@ export * from './group.service';
 export * from './counselor.service';
 export * from './activity.service';
 export * from './week.service'; 
+export * from './period.service'; 

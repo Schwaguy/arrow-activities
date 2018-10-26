@@ -7,8 +7,8 @@
     
 	  <div class="list-group">
 		  <div class="list-group-item row">
-			  <div class="form-group col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
-				  <input type="text"
+			  <div class="form-group col-12 col-xs-12 col-sm-6 col-md-4" style="float:left">
+				  <p><input type="text"
 					class="form-control"
 					name="name"
 					[(ngModel)]="activity.name"
@@ -16,30 +16,84 @@
 					required
 					placeholder="Enter Activity Name">
 				  <span class="help-block danger" *ngIf="activityName.errors?.required && activityName.touched">The Activity Name is required</span>
-				  <span class="help-block danger" *ngIf="activityName.errors?.pattern && activityName.touched">The Activity Name can only contain the letters a-z or A-Z</span>
-			  </div>
-			  
-			  <div class="form-group col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
-				 <textarea
+					  <span class="help-block danger" *ngIf="activityName.errors?.pattern && activityName.touched">The Activity Name can only contain the letters a-z or A-Z</span></p>
+				  
+				  <p><textarea
 					class="form-control"
 					name="description"
 					[(ngModel)]="activity.description"
 					#activityDescription="ngModel"
-					placeholder="Enter Activity Description"></textarea>
+					placeholder="Enter Activity Description"></textarea></p>
+				  
+				  <p><input type="text"
+					class="form-control"
+					name="prerequisites"
+					[(ngModel)]="activity.prerequisites"
+					#activityPrerequisites="ngModel"
+					placeholder="Prerequisites"></p>
+				  
 			  </div>
 			  
 			  <div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
-				  <select
+				  <p><select
 						 [(ngModel)]="activity.week"
 						 class="form-control"
-						 name="week" 	
+						 name="week"
 						 #activityWeek="ngModel">
-					    <option value="0">Unassigned</option> 
 						<option *ngFor="let item of weeks;" value="{{item.id}}">{{item.name}}</option>
-					</select>
+					  </select></p>
+				  
+					<p><select
+						[(ngModel)]="activity.days"
+						class="form-control"
+						name="day" 
+						#activityDay="ngModel">
+						<option value="Monday">Monday</option>
+						<option value="Tuesday">Tuesday</option>
+						<option value="Wednesday">Wednesday</option>
+						<option value="Thursday">Thursday</option>
+						<option value="Friday">Friday</option>
+						</select></p>
+				  
+				    <p><select
+						 [(ngModel)]="activity.period"
+						 class="form-control"
+						 name="period"
+						 #activityPeriod="ngModel">
+						<option *ngFor="let item of periods;" value="{{item.id}}">{{item.name}}</option>
+						</select></p>				 
 			  </div>
 			  
 			  <div class="form-group col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+					 <p><input type="text"
+						class="form-control"
+						name="location"
+						[(ngModel)]="activity.location"
+						#activityLocation="ngModel"
+						required
+						placeholder="Enter Activity Location">
+						 <span class="help-block danger" *ngIf="activityLocation.errors?.required && activityLocation.touched">The Activity Location is required</span></p>
+				  
+				  	<p><input type="number"
+						class="form-control"
+						name="capacity"
+						[(ngModel)]="activity.capacity"
+						#activityCapacity="ngModel"
+						required
+						placeholder="Enter Activity Capacity">
+						 <span class="help-block danger" *ngIf="activityLocation.errors?.required && activityLocation.touched">The Activity Capacity is required</span></p>
+				  
+				  	<p><select
+						 [(ngModel)]="activity.groups"
+						 class="form-control"
+						 name="groups"
+						 multiple	   
+						 #activityGroup="ngModel">
+						<option *ngFor="let item of groups;" value="{{item.id}}">{{item.name}}</option>
+						</select></p>
+			  </div>
+			  
+			  <div class="form-group col-12 col-xs-12 col-sm-6 col-md-2" style="float:left">
 				  <button class="btn btn-primary btn-sm" [disabled]="f.invalid">Add Activity</button>
 			  </div>
 		  </div>

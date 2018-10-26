@@ -11,10 +11,12 @@ if($result = mysqli_query($con,$sql)) {
   	while($row = mysqli_fetch_assoc($result)) {
     	$weeks[$cr]['id'] = $row['id'];
     	$weeks[$cr]['name'] = $row['name'];
-		//$weeks[$cr]['start'] = $row['start'];
-		//$weeks[$cr]['end'] = $row['end'];
-		$weeks[$cr]['start'] = ((!is_null($row['start']) && $row['start']!='0000-00-00') ? date("m/d/Y", strtotime($row['start'])) : '');
-		$weeks[$cr]['end'] = ((!is_null($row['end']) && $row['end']!='0000-00-00') ? date("m/d/Y", strtotime($row['end'])) : '');
+		//$weeks[$cr]['startDate'] = ((!is_null($row['startDate']) && $row['startDate']!='0000-00-00') ? date("m/d/Y", strtotime($row['startDate'])) : '');
+		//$weeks[$cr]['endDate'] = ((!is_null($row['endDate']) && $row['endDate']!='0000-00-00') ? date("m/d/Y", strtotime($row['endDate'])) : '');
+		
+		$weeks[$cr]['startDate'] = $row['startDate'];
+		$weeks[$cr]['endDate'] = $row['endDate'];
+		
     	$cr++;
   	}
     echo json_encode(['data'=>$weeks]);

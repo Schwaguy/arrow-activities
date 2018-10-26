@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { Group } from '../_models';
+import { Period } from '../_models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GroupService {
+export class PeriodService {
 	baseUrl = 'http://activities.arrowheaddaycamp.com/api';
-	groups: Group[];
+	periods: Period[];
 	
 	constructor(private http: HttpClient) { }
 
-  	getAll(): Observable<Group[]> {
-    	return this.http.get(`${this.baseUrl}/bunks/groups`).pipe(
+  	getAll(): Observable<Period[]> {
+    	return this.http.get(`${this.baseUrl}/period/list`).pipe(
       	map((res) => {
-        	this.groups = res['data'];
-        	return this.groups;
+        	this.periods = res['data'];
+        	return this.periods;
     	}),
     	catchError(this.handleError));
   	}

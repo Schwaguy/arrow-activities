@@ -1,0 +1,47 @@
+<div *ngIf="error" class="alert alert-danger">{{error}}</div>
+<div *ngIf="success" class="alert alert-success">{{success}}</div>
+
+<div id="weekList">
+    <h2>Edit Existing Weeks</h2>
+   	<div class="list-group">
+      <div *ngFor="let item of weeks;let i = index;" class="list-group-item row">
+	    
+		<div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+          <input type="text"
+                 [(ngModel)]="weeks[i].name"
+                 class="form-control"
+                 required
+                 #name="ngModel"
+				 [ngClass]="{ 'is-invalid': name.touched && name.invalid }">
+        </div>
+		  
+        <div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+ 			<input type="date"
+				 [(ngModel)]="weeks[i].startDate"
+                 class="form-control"
+                 #startDate="ngModel">
+        </div>
+		  
+		<div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+			<input type="date"
+				 [(ngModel)]="weeks[i].endDate"
+                 class="form-control"
+                 #endDate="ngModel">
+        </div>
+		  
+        <div class="col-12 col-xs-12 col-sm-6 col-md-3" style="float:left">
+          <input type="button"
+                 value="Update"
+                 class="btn btn-success btn-sm"
+                 [disabled]="name.invalid"
+                 (click)="updateWeek(name, startDate, endDate, item.id)">
+          &nbsp;
+          <input type="button"
+                 value="Delete"
+                 class="btn btn-danger btn-sm"
+                 (click)="delete(item.id)">
+
+        </div>
+      </div>
+    </div>
+  </div>

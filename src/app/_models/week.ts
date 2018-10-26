@@ -1,7 +1,7 @@
 export class Week {
 	constructor(
     name: string,
-    start: string,
-	end: string,
+    startDate:  string,
+	endDate: string,
 	id?: number) {}
 }

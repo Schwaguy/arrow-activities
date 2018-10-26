@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent }  from './app.component';
 import { routing } from './app.routing';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from './material/material.module';
 
 import { AlertComponent } from './_directives';
@@ -29,7 +30,8 @@ import { WeekComponent } from './week';
         HttpClientModule,
 		FormsModule,
         routing,
-		MaterialModule
+		NgbModule,
+		//MaterialModule
     ],
     declarations: [
         AppComponent,
