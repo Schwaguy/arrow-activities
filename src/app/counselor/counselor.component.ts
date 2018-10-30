@@ -7,7 +7,7 @@ import { Counselor } from '../_models';
 import { CounselorService } from '../_services';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-counselor',
   //templateUrl: 'group.component.html',
   //styleUrls: ['group.component.css']
 })

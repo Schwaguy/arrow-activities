@@ -19,7 +19,7 @@ import { User } from '../_models';
 import { UserService } from '../_services';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-activity',
   templateUrl: 'activity.component.html',
   //styleUrls: ['activity.component.css']
 })

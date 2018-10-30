@@ -17,7 +17,7 @@ import { User } from '../_models';
 import { UserService } from '../_services';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-bunk',
   templateUrl: 'bunk.component.html',
   styleUrls: ['bunk.component.css']
 })

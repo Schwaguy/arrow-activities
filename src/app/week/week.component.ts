@@ -7,7 +7,7 @@ import { Week } from '../_models';
 import { WeekService } from '../_services';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-week',
   templateUrl: 'week.component.html',
   //styleUrls: ['group.component.css']
 })

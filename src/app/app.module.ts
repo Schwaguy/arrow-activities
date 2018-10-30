@@ -6,8 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent }  from './app.component';
 import { routing } from './app.routing';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MaterialModule } from './material/material.module';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AlertComponent } from './_directives';
 import { AuthGuard } from './_guards';
@@ -18,10 +17,12 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { UserComponent } from './user';
 import { BunkComponent } from './bunk';
-//import { GroupComponent } from './group';
-//import { CounslorComponent } from './counselor';
 import { ActivityComponent } from './activity';
 import { WeekComponent } from './week';
+import { ModalComponent } from './modal/modal.component';
+import { ModalUserComponent } from './modal-user/modal-user.component';
+import { AboutComponent } from './about/about.component';
+import { ModalAboutComponent } from './modal-about/modal-about.component';
 
 @NgModule({
     imports: [
@@ -30,8 +31,9 @@ import { WeekComponent } from './week';
         HttpClientModule,
 		FormsModule,
         routing,
-		NgbModule,
-		//MaterialModule
+        NgbModule.forRoot(),
+        //NgbModal, 
+        //NgbActiveModal
     ],
     declarations: [
         AppComponent,
@@ -41,10 +43,12 @@ import { WeekComponent } from './week';
         RegisterComponent,
 		UserComponent,
 		BunkComponent,
-		//GroupComponent,
-		//CounselorComponent,
 		ActivityComponent,
-		WeekComponent
+		WeekComponent,
+		ModalComponent,
+		ModalUserComponent,
+		AboutComponent,
+		ModalAboutComponent
     ],
     providers: [
         AuthGuard,
@@ -52,15 +56,15 @@ import { WeekComponent } from './week';
         AuthenticationService,
         UserService,
 		BunkService,
-		//GroupService,
-		//CounselorService,
 		ActivityService,
-		WeekService,
+        WeekService,
+        NgbActiveModal,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
-        // provider used to create fake backend
-        //fakeBackendProvider
+    ],
+    entryComponents: [
+        ModalAboutComponent,
+        ModalUserComponent
     ],
     bootstrap: [AppComponent]
 })

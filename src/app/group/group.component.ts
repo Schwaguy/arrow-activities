@@ -7,7 +7,7 @@ import { Group } from '../_models';
 import { GroupService } from '../_services';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-group',
   //templateUrl: 'group.component.html',
   //styleUrls: ['group.component.css']
 })

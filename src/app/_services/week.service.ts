@@ -39,8 +39,8 @@ export class WeekService {
         	});
         	if (theWeek) {
           		theWeek['name'] = week['name'];
-				theWeek['start'] = week['start'];
-				theWeek['end'] = week['end'];
+				theWeek['startDate'] = week['startDate'];
+				theWeek['endDate'] = week['endDate'];
         	}
         	return this.weeks;
       	}),

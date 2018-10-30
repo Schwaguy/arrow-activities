@@ -7,7 +7,7 @@ import { Period } from '../_models';
 import { PeriodService } from '../_services';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-period',
 })
 export class PeriodComponent implements OnInit {
   periods: Period[];
